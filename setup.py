@@ -11,7 +11,7 @@ tests_require = ['moto >= 0.4.23']
 
 setup(
     name='django-amazon-ses',
-    version='0.1.2',
+    version='0.1.3',
     description='A Django email backend that uses Boto3 to interact with'
     'Amazon Simple Email Service (SES).',
     long_description=long_description,
