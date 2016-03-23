@@ -32,4 +32,4 @@ The test suite execution process is managed by tox and takes care to mock out th
 
 .. code:: bash
 
-   tox
+   $ tox
