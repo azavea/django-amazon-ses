@@ -1,0 +1,20 @@
+language: python
+
+sudo: false
+
+env:
+  - TOXENV=py27
+
+install: pip install tox --use-mirrors
+
+script: tox
+
+deploy:
+  provider: pypi
+  user: azavea
+  password:
+    secure: C8IpVApTQqIC7lIRmPn2r2+O8uB1Izac8/H+RJeQ8c23XuuOInNn7WhLCib+dLOHVc/abiRSGhgQPdhrs5RXsj2dhNI28prtlnJiE2w4KHcC7qS1k9l37q8E1beuc6yQSw7z6vJ9qYJ86cge4P/MvEo7fvjC30NIF+SSfgxkzWjZA91tbkxIm1aX7NDVJRxUx7LqpkxdiwMva3qGcXJsdnwAK8P31Xm+1YRpI/1jPVGG7qvuJtPsqTROB4tkob6/97kkpFDc0ub/RF0sBMJ/fXEZGUFmEpIDUupPrt0ZjvAlPV07kqgdcVQHKbg5ueLnAvsm0tlnPe3/sW9GpigkIkfM1aO6QJ8IjBDNUBLz7+V7fq10XEaTtzEuQMIaumIrDc18flqhpcmlQiY0KoHTFH28Orv1oTa0oZ1HzgnQKzJifcQUKglnpUtde//1QL+DFaXKvEi78ZhuvfcaTKL6LX3bvAeeVNZRMEvxOlUzZkEq8a9ZiM07YIcZuhA5gx07Nwtno2bq8QoK8vat4Mlydsx6ielCfDPft+0qHbgpn/09PuquDSsfLB4OAplVpQK/SxRjsQidrVavT+vsG3lHCmn8PxDYT+aW05TtoBEjYV6Umsh+qbxjKsCsx0qhN+P2BCATGcYxvoMvZnw+7YKFvobguEQZ3zpgVWShoDsFzPo=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: azavea/django-amazon-ses
