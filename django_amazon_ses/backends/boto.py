@@ -5,6 +5,10 @@ from botocore.exceptions import ClientError
 
 from django.core.mail.backends.base import BaseEmailBackend
 from django.core.mail.message import sanitize_address
+from django.dispatch import Signal
+
+pre_send = Signal(providing_args=['message'])
+post_send = Signal(providing_args=['message', 'message_id'])
 
 
 class EmailBackend(BaseEmailBackend):
@@ -58,6 +62,8 @@ class EmailBackend(BaseEmailBackend):
             ClientError: An interaction with the Amazon SES HTTP API
                 failed.
         """
+        pre_send.send(self.__class__, message=email_message)
+
         if not email_message.recipients():
             return False
 
@@ -68,12 +74,18 @@ class EmailBackend(BaseEmailBackend):
         message = email_message.message().as_bytes(linesep='\r\n')
 
         try:
-            self.conn.send_raw_email(
+            result = self.conn.send_raw_email(
                 Source=from_email,
                 Destinations=recipients,
                 RawMessage={
                     'Data': message
                 }
+            )
+            message_id = result['MessageId']
+            post_send.send(
+                self.__class__,
+                message=email_message,
+                message_id=message_id
             )
         except ClientError:
             if not self.fail_silently:

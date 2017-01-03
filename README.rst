@@ -56,6 +56,42 @@ Lastly, override the ``EMAIL_BACKEND`` setting within your Django settings file:
 
    EMAIL_BACKEND = 'django_amazon_ses.backends.boto.EmailBackend'
 
+Signals
+-------
+
+Two signals are provided for the backend, ``pre_send`` and ``post_send``. Both signals receive the message object being sent. The ``post_send`` signal also receives the message id of the sent message.
+You can modify the email message on ``pre_send``. For example, if you have a blacklist of email addresses that should never receive emails, you could filter them from the recipients. Example code below:
+
+.. code:: python
+
+    from django.dispatch.dispatcher import receiver
+    from django_amazon_ses.backends.boto import pre_send
+
+    @receiver(pre_send)
+    def remove_blacklisted_emails(sender, message=None, **kwargs):
+        blacklisted_emails = Blacklisted.objects.values_list('email', flat)
+        message.to = [email for email in message.to if email not in blacklisted_emails]
+
+If the ``pre_send`` receiver function ends up removing all of the recipients from the message, the email is not processed and the ``post_send`` signal is not sent.
+
+The ``post_send`` signal could be used to log messages sent by the system. This could be useful if you want to learn the subject line of a message that bounced or received a complaint.
+
+.. code:: python
+
+    from django.dispatch.dispatcher import receiver
+    from django.utils import timezone
+
+    from django_amazon_ses.backends.boto import post_send
+
+    @receiver(post_send)
+    def log_message(sender, message=None, message_id=None, **kwargs):
+        SentMessage.objects.create(
+            subject = message.subject,
+            body = message.body,
+            message_id = message_id,
+            date_sent = timezone.now()
+        )
+
 Testing
 -------
 
