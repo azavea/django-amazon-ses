@@ -1,3 +1,8 @@
+0.2.0
+-----
+
+- Add support for `pre_send` and `post_send` signals for email messages.
+
 0.1.3
 -----
 
