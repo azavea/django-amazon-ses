@@ -79,7 +79,7 @@ You can modify the email message on ``pre_send``. For example, if you have a bla
 If the ``pre_send`` receiver function ends up removing all of the recipients from the message, the email is not processed and the ``post_send`` signal is not sent.
 
 post_send
-********
+*********
 
 Similarly, the ``post_send`` signal can be used to log messages sent by the system. This is useful if you want to log the subject line of a message that bounced or received a complaint.
 
