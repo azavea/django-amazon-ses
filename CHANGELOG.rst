@@ -1,3 +1,8 @@
+0.2.1
+-----
+
+- Functionally identical to ``0.2.0``, but includes a reStructuredText formatting change to the ``README`` for PyPi compatibility.
+
 0.2.0
 -----
 
