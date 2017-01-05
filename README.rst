@@ -59,8 +59,12 @@ Lastly, override the ``EMAIL_BACKEND`` setting within your Django settings file:
 Signals
 -------
 
-Two signals are provided for the backend, ``pre_send`` and ``post_send``. Both signals receive the message object being sent. The ``post_send`` signal also receives the message id of the sent message.
-You can modify the email message on ``pre_send``. For example, if you have a blacklist of email addresses that should never receive emails, you could filter them from the recipients. Example code below:
+Two signals are provided for the backend, ``pre_send`` and ``post_send``. Both signals receive the message object being sent. The ``post_send`` signal also receives the Amazon SES message ID of the sent message.
+
+``pre_send``
+**********
+
+You can modify the email message on ``pre_send``. For example, if you have a blacklist of email addresses that should never receive emails, you can filter them from the recipients:
 
 .. code:: python
 
@@ -74,7 +78,10 @@ You can modify the email message on ``pre_send``. For example, if you have a bla
 
 If the ``pre_send`` receiver function ends up removing all of the recipients from the message, the email is not processed and the ``post_send`` signal is not sent.
 
-The ``post_send`` signal could be used to log messages sent by the system. This could be useful if you want to learn the subject line of a message that bounced or received a complaint.
+``post_send``
+**********
+
+Similarly, the ``post_send`` signal can be used to log messages sent by the system. This is useful if you want to log the subject line of a message that bounced or received a complaint.
 
 .. code:: python
 
