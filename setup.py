@@ -11,7 +11,7 @@ tests_require = ['moto >= 0.4.23']
 
 setup(
     name='django-amazon-ses',
-    version='0.1.3',
+    version='0.3.0',
     description='A Django email backend that uses Boto3 to interact with'
     'Amazon Simple Email Service (SES).',
     long_description=long_description,
@@ -23,7 +23,11 @@ setup(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     keywords='django amazon ses email',
     packages=find_packages(exclude=['tests']),

@@ -3,6 +3,7 @@ import boto3
 
 from botocore.exceptions import ClientError
 
+from django.conf import settings
 from django.core.mail.backends.base import BaseEmailBackend
 from django.core.mail.message import sanitize_address
 from django.dispatch import Signal
@@ -17,7 +18,7 @@ class EmailBackend(BaseEmailBackend):
     Attributes:
         conn: A client connection for Amazon SES.
     """
-    def __init__(self, region_name='us-east-1', fail_silently=False, **kwargs):
+    def __init__(self, region_name=None, fail_silently=False, **kwargs):
         """Creates a client for the Amazon SES API.
 
         Args:
@@ -27,6 +28,12 @@ class EmailBackend(BaseEmailBackend):
 
         """
         super(EmailBackend, self).__init__(fail_silently=fail_silently)
+        if region_name is None:
+            region_name = getattr(
+                settings,
+                'DJANGO_AMAZON_SES_REGION',
+                'us-east-1'
+            )
         self.conn = boto3.client('ses', region_name=region_name)
 
     def send_messages(self, email_messages):
