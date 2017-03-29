@@ -1,3 +1,10 @@
+0.3.0
+-----
+
+- Officially support Python 3.x.
+- Use a more sophisticated matrix build process to test Django compatibility.
+- Add support for ``DJANGO_AMAZON_SES_REGION`` setting.
+
 0.2.2
 -----
 
