@@ -30,7 +30,7 @@ class MailTests(SimpleTestCase):
     def test_custom_backend(self):
         """Test Amazon SES backend."""
         client = boto3.client('ses', region_name='us-east-1')
-        client.verify_email_identity(EmailAddress="bounce@example.com")
+        client.verify_email_identity(EmailAddress='bounce@example.com')
 
         conn = mail.get_connection(
             'django_amazon_ses.backends.boto.EmailBackend')
@@ -44,7 +44,7 @@ class MailTests(SimpleTestCase):
     @mock.patch("django_amazon_ses.backends.boto.pre_send.send")
     def test_signal_pre(self, mock_signal):
         client = boto3.client('ses', region_name='us-east-1')
-        client.verify_email_identity(EmailAddress="bounce@example.com")
+        client.verify_email_identity(EmailAddress='bounce@example.com')
 
         conn = mail.get_connection(
             'django_amazon_ses.backends.boto.EmailBackend')
@@ -61,7 +61,7 @@ class MailTests(SimpleTestCase):
     @mock.patch("django_amazon_ses.backends.boto.post_send.send")
     def test_signal_post(self, mock_signal):
         client = boto3.client('ses', region_name='us-east-1')
-        client.verify_email_identity(EmailAddress="bounce@example.com")
+        client.verify_email_identity(EmailAddress='bounce@example.com')
 
         conn = mail.get_connection(
             'django_amazon_ses.backends.boto.EmailBackend')
@@ -88,7 +88,7 @@ class MailTests(SimpleTestCase):
         pre_send.connect(change_recipients)
 
         client = boto3.client('ses', region_name='us-east-1')
-        client.verify_email_identity(EmailAddress="bounce@example.com")
+        client.verify_email_identity(EmailAddress='bounce@example.com')
 
         conn = mail.get_connection(
             'django_amazon_ses.backends.boto.EmailBackend')
@@ -107,7 +107,7 @@ class MailTests(SimpleTestCase):
         pre_send.connect(remove_recipients)
 
         client = boto3.client('ses', region_name='us-east-1')
-        client.verify_email_identity(EmailAddress="bounce@example.com")
+        client.verify_email_identity(EmailAddress='bounce@example.com')
 
         conn = mail.get_connection(
             'django_amazon_ses.backends.boto.EmailBackend')
