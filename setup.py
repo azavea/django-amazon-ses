@@ -7,7 +7,6 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
-tests_require = ['moto >= 0.4.23']
 
 setup(
     name='django-amazon-ses',
@@ -32,9 +31,4 @@ setup(
     keywords='django amazon ses email',
     packages=find_packages(exclude=['tests']),
     install_requires=['boto3 >= 1.3.0'],
-    extras_require={
-        'dev': [],
-        'test': tests_require,
-    },
-    tests_require=tests_require,
 )
