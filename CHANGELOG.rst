@@ -1,3 +1,10 @@
+0.3.1
+=====
+
+- Fix `tox` installation of test dependencies.
+- Add `pip` cache to Travis CI configuration.
+- Include license file in wheel package.
+
 0.3.0
 -----
 
