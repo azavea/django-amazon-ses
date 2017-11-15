@@ -38,7 +38,9 @@ deploy:
   user: azavea
   password:
     secure: JaMwSJzuskaUKsSzLiTXm/FYvCabmblXjra0TkAGLdJvi3/PocGXSv4OrCCowV/c+DUNxMstNEXhcE9ypYAgElN3rBA60Lfy2imDzXr2JYbhCuEWfGubOa+rYLUt5DX3eNYyPk1ZcftMbVxdSrwSxDFhNWX7XRo+A8ZGY/eQ42EuUqJ7HNf5Atl8/h7c0ptDbQZqa/u+SDCB1T1zc7EfOwixl1WspZMZt3jiYkDyL1dDpCmVNgYl3dNGjiavcVazNUqaJOi+IcngC3BeEH/pKtUchj23Iva/0NI1NfHBDfyV6qOWBJsMb6Zb2B3GK50kEWvboil3Y3CYbIytBx0HnOs1N4EBliN/L0T/ohIUPX5JknyZXAff1aGSeZcf0I2LTl1LTHP/O5/fn2MkR3QzNxtHmOoT0teyAvxqU5tx/WUSV6cxK3CrAqar79ef786/vefoCeX9QjzElnrwxQUzC1/NXOewiHJHc4bu2t9DgfnxFOGuZL7Pyj3HZ+xS2GuYKy9Y8VQtsPSdEvi6UrdSzkxYts7wOPEneauGHMzKbBK1jIwX7mulRdgq80F2xL5VTtrBecHTznsHdFzKEgaJmAV+g/fWtyA2rPb+5yNwSHQMBjZ+Cz0YhwVYDYiOzfMmjzdHq4rtFIaZGJxdRhQrflJ9EQhlCFEiOn/O+ilxeRA=
+  distributions: sdist bdist_wheel
   on:
     tags: true
-    distributions: sdist bdist_wheel
+    python: "3.6"
+    condition: "$DJANGO = 1.11"
     repo: azavea/django-amazon-ses
