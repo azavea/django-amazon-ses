@@ -14,14 +14,7 @@ from django.test import SimpleTestCase
 
 from django_amazon_ses.backends.boto import pre_send
 
-settings.configure(
-    DATABASES={
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": ":memory:",
-        }
-    }
-)
+settings.configure()
 
 
 class MailTests(SimpleTestCase):
