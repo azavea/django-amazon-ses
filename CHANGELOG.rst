@@ -1,3 +1,9 @@
+0.3.2
+=====
+
+- Fix Travis CI deployment process to account for wheels.
+- Ensure that only one element of the build matrix publishes to PyPI.
+
 0.3.1
 =====
 
