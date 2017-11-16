@@ -19,7 +19,7 @@ setup(
     author_email='hcastro@azavea.com',
     license='Apache License 2.0',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
         'Framework :: Django :: 1.8',
         'Framework :: Django :: 1.9',
