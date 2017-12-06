@@ -18,23 +18,24 @@ class EmailBackend(BaseEmailBackend):
     Attributes:
         conn: A client connection for Amazon SES.
     """
-    def __init__(self, region_name=None, fail_silently=False, **kwargs):
+    def __init__(self, fail_silently=False, **kwargs):
         """Creates a client for the Amazon SES API.
 
         Args:
-            region_name: Amazon region for SES endpoint.
             fail_silently: Flag that determines whether Amazon SES
                 client errors should throw an exception.
 
         """
         super(EmailBackend, self).__init__(fail_silently=fail_silently)
-        if region_name is None:
-            region_name = getattr(
-                settings,
-                'DJANGO_AMAZON_SES_REGION',
-                'us-east-1'
-            )
-        self.conn = boto3.client('ses', region_name=region_name)
+        access_key_id = getattr(settings, 'AWS_ACCESS_KEY_ID', None)
+        secret_access_key = getattr(settings, 'AWS_SECRET_ACCESS_KEY', None)
+        region_name = getattr(settings, 'AWS_DEFAULT_REGION', 'us-east-1')
+        self.conn = boto3.client(
+            'ses',
+            aws_access_key_id=access_key_id,
+            aws_secret_access_key=secret_access_key,
+            region_name=region_name,
+        )
 
     def send_messages(self, email_messages):
         """Sends one or more EmailMessage objects and returns the
