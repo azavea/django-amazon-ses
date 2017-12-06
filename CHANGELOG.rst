@@ -1,3 +1,8 @@
+UNRELEASED
+==========
+
+- Dropped support for Python 3.3.
+
 0.3.2
 =====
 
