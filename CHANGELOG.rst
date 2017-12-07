@@ -2,6 +2,8 @@ UNRELEASED
 ==========
 
 - Dropped support for Python 3.3.
+- Add testing and support for Django 2.0 (no actual code changes were
+  required).
 
 0.3.2
 =====
