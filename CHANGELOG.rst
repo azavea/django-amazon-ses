@@ -1,7 +1,7 @@
-UNRELEASED
-==========
+1.0.0
+=====
 
-- Dropped support for Python 3.3.
+- Drop support for Python 3.3.
 - Add testing and support for Django 2.0 (no actual code changes were
   required).
 - Add settings ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` to configure
