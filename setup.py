@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 from codecs import open
 from os import path
 
@@ -37,6 +37,6 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     keywords='django amazon ses email',
-    packages=find_packages(exclude=['tests']),
+    py_modules=['django_amazon_ses'],
     install_requires=['boto3 >= 1.3.0'],
 )

@@ -8,6 +8,15 @@ UNRELEASED
   credentials through ``settings.py``.
 - Rename setting ``DJANGO_AMAZON_SES_REGION`` to ``AWS_DEFAULT_REGION`` (to
   match the Boto 3 environment variable).
+- ``django_amazon_ses`` is now a module instead of a package. To upgrade,
+  change the ``EMAIL_BACKEND`` setting in ``settings.py``:
+
+  .. code:: python
+
+    EMAIL_BACKEND = 'django_amazon_ses.EmailBackend'
+
+  Importing signals should now be imported from ``django_amazon_ses`` instead
+  of ``django_amazon_ses.backends.boto``.
 
 0.3.2
 =====

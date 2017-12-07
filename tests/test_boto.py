@@ -12,7 +12,7 @@ from django.core.mail import EmailMessage
 
 from django.test import SimpleTestCase
 
-from django_amazon_ses.backends.boto import pre_send
+from django_amazon_ses import pre_send
 
 settings.configure()
 
@@ -25,8 +25,7 @@ class MailTests(SimpleTestCase):
         client = boto3.client('ses', region_name='us-east-1')
         client.verify_email_identity(EmailAddress="bounce@example.com")
 
-        conn = mail.get_connection(
-            'django_amazon_ses.backends.boto.EmailBackend')
+        conn = mail.get_connection('django_amazon_ses.EmailBackend')
         email = EmailMessage(
             'Subject', 'Content', 'bounce@example.com', ['to@example.com'],
             headers={'From': 'from@example.com'},
@@ -34,13 +33,12 @@ class MailTests(SimpleTestCase):
         self.assertGreater(conn.send_messages([email]), 0)
 
     @mock_ses
-    @mock.patch("django_amazon_ses.backends.boto.pre_send.send")
+    @mock.patch("django_amazon_ses.pre_send.send")
     def test_signal_pre(self, mock_signal):
         client = boto3.client('ses', region_name='us-east-1')
         client.verify_email_identity(EmailAddress="bounce@example.com")
 
-        conn = mail.get_connection(
-            'django_amazon_ses.backends.boto.EmailBackend')
+        conn = mail.get_connection('django_amazon_ses.EmailBackend')
         email = EmailMessage(
             'Subject', 'Content', 'bounce@example.com', ['to@example.com'],
             headers={'From': 'from@example.com'},
@@ -51,13 +49,12 @@ class MailTests(SimpleTestCase):
         self.assertEqual(email, called_kwargs['message'])
 
     @mock_ses
-    @mock.patch("django_amazon_ses.backends.boto.post_send.send")
+    @mock.patch("django_amazon_ses.post_send.send")
     def test_signal_post(self, mock_signal):
         client = boto3.client('ses', region_name='us-east-1')
         client.verify_email_identity(EmailAddress="bounce@example.com")
 
-        conn = mail.get_connection(
-            'django_amazon_ses.backends.boto.EmailBackend')
+        conn = mail.get_connection('django_amazon_ses.EmailBackend')
         email = EmailMessage(
             'Subject', 'Content', 'bounce@example.com', ['to@example.com'],
             headers={'From': 'from@example.com'},
@@ -83,8 +80,7 @@ class MailTests(SimpleTestCase):
         client = boto3.client('ses', region_name='us-east-1')
         client.verify_email_identity(EmailAddress="bounce@example.com")
 
-        conn = mail.get_connection(
-            'django_amazon_ses.backends.boto.EmailBackend')
+        conn = mail.get_connection('django_amazon_ses.EmailBackend')
         email = EmailMessage(
             'Subject', 'Content', 'bounce@example.com', ['to@example.com'],
             headers={'From': 'from@example.com'},
@@ -102,8 +98,7 @@ class MailTests(SimpleTestCase):
         client = boto3.client('ses', region_name='us-east-1')
         client.verify_email_identity(EmailAddress="bounce@example.com")
 
-        conn = mail.get_connection(
-            'django_amazon_ses.backends.boto.EmailBackend')
+        conn = mail.get_connection('django_amazon_ses.EmailBackend')
         email = EmailMessage(
             'Subject', 'Content', 'bounce@example.com', ['to@example.com'],
             headers={'From': 'from@example.com'},

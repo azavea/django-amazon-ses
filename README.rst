@@ -54,7 +54,7 @@ Lastly, override the ``EMAIL_BACKEND`` setting within your Django settings file:
 
 .. code:: python
 
-   EMAIL_BACKEND = 'django_amazon_ses.backends.boto.EmailBackend'
+   EMAIL_BACKEND = 'django_amazon_ses.EmailBackend'
 
 Optionally, you can set the AWS credentials. If unset, the backend will
 gracefully fall back to other Boto 3 credential providers.
@@ -84,7 +84,7 @@ You can modify the email message on ``pre_send``. For example, if you have a bla
 .. code:: python
 
     from django.dispatch.dispatcher import receiver
-    from django_amazon_ses.backends.boto import pre_send
+    from django_amazon_ses import pre_send
 
     @receiver(pre_send)
     def remove_blacklisted_emails(sender, message=None, **kwargs):
@@ -103,7 +103,7 @@ Similarly, the ``post_send`` signal can be used to log messages sent by the syst
     from django.dispatch.dispatcher import receiver
     from django.utils import timezone
 
-    from django_amazon_ses.backends.boto import post_send
+    from django_amazon_ses import post_send
 
     @receiver(post_send)
     def log_message(sender, message=None, message_id=None, **kwargs):
