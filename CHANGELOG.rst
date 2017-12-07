@@ -1,3 +1,23 @@
+1.0.0
+=====
+
+- Drop support for Python 3.3.
+- Add testing and support for Django 2.0 (no actual code changes were
+  required).
+- Add settings ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` to configure
+  credentials through ``settings.py``.
+- Rename setting ``DJANGO_AMAZON_SES_REGION`` to ``AWS_DEFAULT_REGION`` (to
+  match the Boto 3 environment variable).
+- ``django_amazon_ses`` is now a module instead of a package. To upgrade,
+  change the ``EMAIL_BACKEND`` setting in ``settings.py``:
+
+  .. code:: python
+
+    EMAIL_BACKEND = 'django_amazon_ses.EmailBackend'
+
+  Importing signals should now be imported from ``django_amazon_ses`` instead
+  of ``django_amazon_ses.backends.boto``.
+
 0.3.2
 =====
 

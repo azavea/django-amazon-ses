@@ -8,27 +8,6 @@ python:
   - "3.5"
   - "3.6"
 
-env:
-  - DJANGO=1.8
-  - DJANGO=1.9
-  - DJANGO=1.10
-  - DJANGO=1.11
-  - DJANGO=master
-
-matrix:
-    fast_finish: true
-    exclude:
-      - python: "2.7"
-        env: DJANGO=master
-      - python: "3.4"
-        env: DJANGO=master
-      - python: "3.6"
-        env: DJANGO=1.8
-      - python: "3.6"
-        env: DJANGO=1.9
-      - python: "3.6"
-        env: DJANGO=1.10
-
 install: pip install tox-travis
 
 script: tox
@@ -42,5 +21,4 @@ deploy:
   on:
     tags: true
     python: "3.6"
-    condition: "$DJANGO = 1.11"
     repo: azavea/django-amazon-ses
