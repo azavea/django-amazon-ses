@@ -56,11 +56,20 @@ Lastly, override the ``EMAIL_BACKEND`` setting within your Django settings file:
 
    EMAIL_BACKEND = 'django_amazon_ses.backends.boto.EmailBackend'
 
+Optionally, you can set the AWS credentials. If unset, the backend will
+gracefully fall back to other Boto 3 credential providers.
+
+.. code:: python
+
+   AWS_ACCESS_KEY_ID = 'my_access_key...'
+   AWS_SECRET_ACCESS_KEY = 'my_secret...'
+
+
 Optionally, you can set the AWS region to be used (default is ``'us-east-1'``):
 
 .. code:: python
 
-   DJANGO_AMAZON_SES_REGION = 'eu-west-1'
+   AWS_DEFAULT_REGION = 'eu-west-1'
 
 Signals
 -------

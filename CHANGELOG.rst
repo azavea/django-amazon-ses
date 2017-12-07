@@ -4,6 +4,10 @@ UNRELEASED
 - Dropped support for Python 3.3.
 - Add testing and support for Django 2.0 (no actual code changes were
   required).
+- Add settings ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` to configure
+  credentials through ``settings.py``.
+- Rename setting ``DJANGO_AMAZON_SES_REGION`` to ``AWS_DEFAULT_REGION`` (to
+  match the Boto 3 environment variable).
 
 0.3.2
 =====
