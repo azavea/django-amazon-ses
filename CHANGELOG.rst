@@ -27,8 +27,8 @@
 0.3.1
 =====
 
-- Fix `tox` installation of test dependencies.
-- Add `pip` cache to Travis CI configuration.
+- Fix ``tox`` installation of test dependencies.
+- Add ``pip`` cache to Travis CI configuration.
 - Include license file in wheel package.
 
 0.3.0
@@ -51,7 +51,7 @@
 0.2.0
 -----
 
-- Add support for `pre_send` and `post_send` signals for email messages.
+- Add support for ``pre_send`` and ``post_send`` signals for email messages.
 
 0.1.3
 -----
