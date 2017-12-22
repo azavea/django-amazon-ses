@@ -27,9 +27,9 @@ class EmailBackend(BaseEmailBackend):
 
         """
         super(EmailBackend, self).__init__(fail_silently=fail_silently)
-        access_key_id = getattr(settings, 'AWS_ACCESS_KEY_ID', None)
-        secret_access_key = getattr(settings, 'AWS_SECRET_ACCESS_KEY', None)
-        region_name = getattr(settings, 'AWS_DEFAULT_REGION', 'us-east-1')
+        access_key_id = getattr(settings, 'AWS_SES_ACCESS_KEY_ID', getattr(settings, 'AWS_ACCESS_KEY_ID', None))
+        secret_access_key = getattr(settings, 'AWS_SES_SECRET_ACCESS_KEY', getattr(settings, 'AWS_SECRET_ACCESS_KEY', None))
+        region_name = getattr(settings, 'AWS_SES_REGION', getattr(settings, 'AWS_DEFAULT_REGION', 'us-east-1'))
         self.conn = boto3.client(
             'ses',
             aws_access_key_id=access_key_id,
