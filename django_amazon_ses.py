@@ -39,7 +39,7 @@ class EmailBackend(BaseEmailBackend):
         secret_access_key = getattr(settings, 'AWS_SES_SECRET_ACCESS_KEY',
                                     secret_access_key)
         region_name = getattr(settings, 'AWS_SES_REGION', region_name)
-        
+
         self.conn = boto3.client(
             'ses',
             aws_access_key_id=access_key_id,
