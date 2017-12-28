@@ -21,9 +21,6 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
-        'Framework :: Django :: 1.10',
         'Framework :: Django :: 1.11',
         'Framework :: Django :: 2.0',
         'Intended Audience :: Developers',
@@ -38,5 +35,8 @@ setup(
     ],
     keywords='django amazon ses email',
     py_modules=['django_amazon_ses'],
-    install_requires=['boto3 >= 1.3.0'],
+    install_requires=[
+        'boto3 >= 1.3.0',
+        'Django >= 1.11',
+    ],
 )

@@ -1,3 +1,8 @@
+UNRELEASED
+==========
+
+- Remove support for Django < 1.11.
+
 1.0.0 - 2017-12-07
 ==================
 
