@@ -2,6 +2,8 @@ UNRELEASED
 ==========
 
 - Remove support for Django < 1.11.
+- Add ``AWS_SES_*`` settings to configure AWS credentials through
+  ``settings.py``.
 
 1.0.0 - 2017-12-07
 ==================

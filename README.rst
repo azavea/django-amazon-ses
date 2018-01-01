@@ -71,6 +71,14 @@ Optionally, you can set the AWS region to be used (default is ``'us-east-1'``):
 
    AWS_DEFAULT_REGION = 'eu-west-1'
 
+Alternatively, provide AWS credentials using the settings below. This is useful in situations where you want to use separate credentials to send emails via SES than you would for other AWS services.
+
+.. code:: python
+
+    AWS_SES_ACCESS_KEY_ID = 'my_access_key...'
+    AWS_SES_SECRET_ACCESS_KEY = 'my_secret...'
+    AWS_SES_REGION = 'us-west-2'
+
 Signals
 -------
 
