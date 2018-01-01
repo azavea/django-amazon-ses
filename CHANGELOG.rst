@@ -1,7 +1,9 @@
-UNRELEASED - 2017-12-21
-=======================
+UNRELEASED
+==========
 
-- Add option to use different AWS settings through ``AWS_SES_ACCESS_KEY_ID``, ``AWS_SES_SECRET_ACCESS_KEY``, ``AWS_SES_REGION``
+- Remove support for Django < 1.11.
+- Add ``AWS_SES_*`` settings to configure AWS credentials through
+  ``settings.py``.
 
 1.0.0 - 2017-12-07
 ==================
