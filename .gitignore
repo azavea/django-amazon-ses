@@ -9,3 +9,4 @@ __pycache__/
 .tox
 .cache
 .eggs
+.vscode/settings.json
