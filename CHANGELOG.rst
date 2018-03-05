@@ -1,8 +1,10 @@
-UNRELEASED
-==========
+UNRELEASED - 2019-08-08
+=======================
 
 - Add support for Django 3.x and Python 3.8. No actual code changes were
   required.
+- Add ``AWS_SES_CONFIGURATION_SET_NAME`` option to use a specific SES
+  configuration set.
 
 2.1.1 - 2019-06-08
 ==================

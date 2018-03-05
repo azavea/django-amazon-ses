@@ -46,6 +46,9 @@ class EmailBackend(BaseEmailBackend):
             settings, "AWS_SES_SECRET_ACCESS_KEY", secret_access_key
         )
         region_name = getattr(settings, "AWS_SES_REGION", region_name)
+        self.configuration_set_name = getattr(
+            settings, "AWS_SES_CONFIGURATION_SET_NAME", None
+        )
 
         # Override all previous configuration if settings provided
         # through the constructor
@@ -106,9 +109,18 @@ class EmailBackend(BaseEmailBackend):
         message = email_message.message().as_bytes(linesep="\r\n")
 
         try:
-            result = self.conn.send_raw_email(
-                Source=from_email, Destinations=recipients, RawMessage={"Data": message}
-            )
+            kwargs = {
+                "Source": from_email,
+                "Destinations": recipients,
+                "RawMessage": {"Data": message},
+            }
+
+            if self.configuration_set_name is not None:
+                kwargs["ConfigurationSetName"] = self.configuration_set_name
+
+            result = self.conn.send_raw_email(**kwargs)
+            message_id = result["MessageId"]
+            post_send.send(self.__class__, message=email_message, message_id=message_id)
             message_id = result["MessageId"]
             post_send.send(self.__class__, message=email_message, message_id=message_id)
         except (ClientError, BotoCoreError):
