@@ -80,6 +80,7 @@ Alternatively, provide AWS credentials using the settings below. This is useful 
     AWS_SES_ACCESS_KEY_ID = 'my_access_key...'
     AWS_SES_SECRET_ACCESS_KEY = 'my_secret...'
     AWS_SES_REGION = 'us-west-2'
+    AWS_SES_CONFIGURATION_SET_NAME = 'my_configuration_set'
 
 Signals
 -------

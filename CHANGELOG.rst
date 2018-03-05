@@ -1,3 +1,8 @@
+UNRELEASED - 2018-03-05
+=======================
+
+- Add option to use a specific AWS configuration set
+
 UNRELEASED
 ==========
 
