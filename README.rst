@@ -14,6 +14,8 @@ First, install the Django Amazon SES email backend:
 
 Next, ensure that your Amazon Web Services (AWS) API credentials are setup, or that you are running on an Amazon EC2 instance with an instance profile that has access to the Amazon SES service.
 
+**Note**: Versions 1.0.x of ``django-amazon-ses`` are the last versions compatible with Django versions earlier than 1.11. If you are using Django versions earlier than 1.11.x, please pin your ``django-amazon-ses`` version.
+
 AWS API Credential Setup
 ************************
 
@@ -70,6 +72,14 @@ Optionally, you can set the AWS region to be used (default is ``'us-east-1'``):
 .. code:: python
 
    AWS_DEFAULT_REGION = 'eu-west-1'
+
+Alternatively, provide AWS credentials using the settings below. This is useful in situations where you want to use separate credentials to send emails via SES than you would for other AWS services.
+
+.. code:: python
+
+    AWS_SES_ACCESS_KEY_ID = 'my_access_key...'
+    AWS_SES_SECRET_ACCESS_KEY = 'my_secret...'
+    AWS_SES_REGION = 'us-west-2'
 
 Signals
 -------

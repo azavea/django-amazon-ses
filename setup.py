@@ -10,7 +10,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='django-amazon-ses',
-    version='1.0.0',
+    version='2.0.0',
     description='A Django email backend that uses Boto3 to interact with'
     'Amazon Simple Email Service (SES).',
     long_description=long_description,
@@ -21,9 +21,6 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
-        'Framework :: Django :: 1.10',
         'Framework :: Django :: 1.11',
         'Framework :: Django :: 2.0',
         'Intended Audience :: Developers',
@@ -38,5 +35,9 @@ setup(
     ],
     keywords='django amazon ses email',
     py_modules=['django_amazon_ses'],
-    install_requires=['boto3 >= 1.3.0'],
+    install_requires=[
+        'boto3 >= 1.3.0',
+        'Django >= 1.11',
+    ],
+    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
 )

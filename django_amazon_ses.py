@@ -18,7 +18,9 @@ class EmailBackend(BaseEmailBackend):
     Attributes:
         conn: A client connection for Amazon SES.
     """
-    def __init__(self, fail_silently=False, **kwargs):
+
+    def __init__(self, fail_silently=False, aws_access_key_id=None,
+                 aws_secret_access_key=None, **kwargs):
         """Creates a client for the Amazon SES API.
 
         Args:
@@ -27,9 +29,25 @@ class EmailBackend(BaseEmailBackend):
 
         """
         super(EmailBackend, self).__init__(fail_silently=fail_silently)
+
+        # Get configuration from AWS prefixed settings in settings.py
         access_key_id = getattr(settings, 'AWS_ACCESS_KEY_ID', None)
         secret_access_key = getattr(settings, 'AWS_SECRET_ACCESS_KEY', None)
         region_name = getattr(settings, 'AWS_DEFAULT_REGION', 'us-east-1')
+
+        # Override AWS prefixed configuration with Amazon SES-specific settings
+        access_key_id = getattr(settings, 'AWS_SES_ACCESS_KEY_ID',
+                                access_key_id)
+        secret_access_key = getattr(settings, 'AWS_SES_SECRET_ACCESS_KEY',
+                                    secret_access_key)
+        region_name = getattr(settings, 'AWS_SES_REGION', region_name)
+
+        # Override all previous configuration if settings provided
+        # through the constructor
+        if aws_access_key_id is not None and aws_secret_access_key is not None:
+            access_key_id = aws_access_key_id
+            secret_access_key = aws_secret_access_key
+
         self.conn = boto3.client(
             'ses',
             aws_access_key_id=access_key_id,
