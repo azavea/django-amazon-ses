@@ -3,6 +3,10 @@ django-amazon-ses
 
 .. image:: https://travis-ci.org/azavea/django-amazon-ses.svg?branch=develop
     :target: https://travis-ci.org/azavea/django-amazon-ses
+.. image:: https://api.codeclimate.com/v1/badges/b69dce91215b7003066b/maintainability
+    :target: https://codeclimate.com/github/azavea/django-amazon-ses/maintainability
+.. image:: https://api.codeclimate.com/v1/badges/b69dce91215b7003066b/test_coverage
+    :target: https://codeclimate.com/github/azavea/django-amazon-ses/test_coverage
 
 A Django email backend that uses `Boto 3 <https://boto3.readthedocs.io/en/latest/>`_ to interact with `Amazon Simple Email Service (SES) <https://aws.amazon.com/ses/>`_.
 
