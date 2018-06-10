@@ -1,7 +1,8 @@
 UNRELEASED
 ==========
 
-- TBD
+- Added support and testing for Django 2.1. No actual code changes were
+  required.
 
 2.0.0 - 2018-04-10
 ==================
