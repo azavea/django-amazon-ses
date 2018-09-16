@@ -55,12 +55,12 @@ UNRELEASED
 0.2.2 - 2017-01-05
 ==================
 
-- Functionally identical to ``0.2.0-0.2.1``, but includes a reStructuredText formatting change to the ``README`` for PyPi compatibility.
+- Functionally identical to ``0.2.0-0.2.1``, but includes a reStructuredText formatting change to the ``README`` for PyPI compatibility.
 
 0.2.1 - 2017-01-05
 ==================
 
-- Functionally identical to ``0.2.0``, but includes a reStructuredText formatting change to the ``README`` for PyPi compatibility.
+- Functionally identical to ``0.2.0``, but includes a reStructuredText formatting change to the ``README`` for PyPI compatibility.
 
 0.2.0 - 2017-01-05
 ==================
