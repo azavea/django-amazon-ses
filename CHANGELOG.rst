@@ -1,5 +1,5 @@
-UNRELEASED
-==========
+2.1.0 - 2019-04-03
+==================
 
 - Add support and testing for Django 2.1, 2.2 and Python 3.7. No actual code
   changes were required.
