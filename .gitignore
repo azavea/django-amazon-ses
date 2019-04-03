@@ -9,3 +9,6 @@ __pycache__/
 .tox
 .cache
 .eggs
+.pytest_cache/
+.coverage
+coverage.xml

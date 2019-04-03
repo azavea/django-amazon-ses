@@ -1,10 +1,35 @@
 django-amazon-ses
 =================
 
+.. image:: https://travis-ci.org/azavea/django-amazon-ses.svg?branch=develop
+    :target: https://travis-ci.org/azavea/django-amazon-ses
+.. image:: https://api.codeclimate.com/v1/badges/b69dce91215b7003066b/maintainability
+    :target: https://codeclimate.com/github/azavea/django-amazon-ses/maintainability
+.. image:: https://api.codeclimate.com/v1/badges/b69dce91215b7003066b/test_coverage
+    :target: https://codeclimate.com/github/azavea/django-amazon-ses/test_coverage
+
 A Django email backend that uses `Boto 3 <https://boto3.readthedocs.io/en/latest/>`_ to interact with `Amazon Simple Email Service (SES) <https://aws.amazon.com/ses/>`_.
 
-Usage
------
+Table of Contents
+-----------------
+
+* `Installation <#installation>`_
+* `AWS Credential Setup <#aws-credential-setup>`_
+
+  * `AWS Named Profile <#aws-named-profile>`_
+  * `AWS EC2 Instance Profile <#aws-ec2-instance-profile>`_
+
+* `Django Configuration <#django-configuration>`_
+* `Usage <#usage>`_
+* `Signals <#signals>`_
+
+  * `pre_send <#pre-send>`_
+  * `post_send <#post-send>`_
+   
+* `Testing <#testing>`_
+
+Installation
+------------
 
 First, install the Django Amazon SES email backend:
 
@@ -16,8 +41,11 @@ Next, ensure that your Amazon Web Services (AWS) API credentials are setup, or t
 
 **Note**: Versions 1.0.x of ``django-amazon-ses`` are the last versions compatible with Django versions earlier than 1.11. If you are using Django versions earlier than 1.11.x, please pin your ``django-amazon-ses`` version.
 
-AWS API Credential Setup
-************************
+AWS Credential Setup
+--------------------
+
+AWS Named Profile
+*****************
 
 Create an AWS API credential profile named ``test`` using the `AWS CLI <https://aws.amazon.com/cli/>`_:
 
@@ -50,7 +78,7 @@ Create an `instance profile <http://docs.aws.amazon.com/codedeploy/latest/usergu
    }
 
 Django Configuration
-********************
+--------------------
 
 Lastly, override the ``EMAIL_BACKEND`` setting within your Django settings file:
 
@@ -58,8 +86,7 @@ Lastly, override the ``EMAIL_BACKEND`` setting within your Django settings file:
 
    EMAIL_BACKEND = 'django_amazon_ses.EmailBackend'
 
-Optionally, you can set the AWS credentials. If unset, the backend will
-gracefully fall back to other Boto 3 credential providers.
+Optionally, you can set the AWS credentials. If unset, the backend will gracefully fall back to other Boto 3 credential providers.
 
 .. code:: python
 
@@ -80,6 +107,23 @@ Alternatively, provide AWS credentials using the settings below. This is useful 
     AWS_SES_ACCESS_KEY_ID = 'my_access_key...'
     AWS_SES_SECRET_ACCESS_KEY = 'my_secret...'
     AWS_SES_REGION = 'us-west-2'
+
+Usage
+-----
+
+Once the configuration above is complete, use ``send_email`` to send email messages with Amazon SES from within your application:
+
+.. code:: python
+
+    from django.core.mail import send_mail
+
+    send_mail(
+        'Subject here',
+        'Here is the message.',
+        'from@example.com',
+        ['to@example.com'],
+        fail_silently=False,
+    )
 
 Signals
 -------
