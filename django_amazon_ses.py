@@ -8,8 +8,8 @@ from django.core.mail.backends.base import BaseEmailBackend
 from django.core.mail.message import sanitize_address
 from django.dispatch import Signal
 
-pre_send = Signal(providing_args=['message'])
-post_send = Signal(providing_args=['message', 'message_id'])
+pre_send = Signal(providing_args=["message"])
+post_send = Signal(providing_args=["message", "message_id"])
 
 
 class EmailBackend(BaseEmailBackend):
@@ -19,8 +19,13 @@ class EmailBackend(BaseEmailBackend):
         conn: A client connection for Amazon SES.
     """
 
-    def __init__(self, fail_silently=False, aws_access_key_id=None,
-                 aws_secret_access_key=None, **kwargs):
+    def __init__(
+        self,
+        fail_silently=False,
+        aws_access_key_id=None,
+        aws_secret_access_key=None,
+        **kwargs
+    ):
         """Creates a client for the Amazon SES API.
 
         Args:
@@ -31,16 +36,16 @@ class EmailBackend(BaseEmailBackend):
         super(EmailBackend, self).__init__(fail_silently=fail_silently)
 
         # Get configuration from AWS prefixed settings in settings.py
-        access_key_id = getattr(settings, 'AWS_ACCESS_KEY_ID', None)
-        secret_access_key = getattr(settings, 'AWS_SECRET_ACCESS_KEY', None)
-        region_name = getattr(settings, 'AWS_DEFAULT_REGION', 'us-east-1')
+        access_key_id = getattr(settings, "AWS_ACCESS_KEY_ID", None)
+        secret_access_key = getattr(settings, "AWS_SECRET_ACCESS_KEY", None)
+        region_name = getattr(settings, "AWS_DEFAULT_REGION", "us-east-1")
 
         # Override AWS prefixed configuration with Amazon SES-specific settings
-        access_key_id = getattr(settings, 'AWS_SES_ACCESS_KEY_ID',
-                                access_key_id)
-        secret_access_key = getattr(settings, 'AWS_SES_SECRET_ACCESS_KEY',
-                                    secret_access_key)
-        region_name = getattr(settings, 'AWS_SES_REGION', region_name)
+        access_key_id = getattr(settings, "AWS_SES_ACCESS_KEY_ID", access_key_id)
+        secret_access_key = getattr(
+            settings, "AWS_SES_SECRET_ACCESS_KEY", secret_access_key
+        )
+        region_name = getattr(settings, "AWS_SES_REGION", region_name)
 
         # Override all previous configuration if settings provided
         # through the constructor
@@ -49,7 +54,7 @@ class EmailBackend(BaseEmailBackend):
             secret_access_key = aws_secret_access_key
 
         self.conn = boto3.client(
-            'ses',
+            "ses",
             aws_access_key_id=access_key_id,
             aws_secret_access_key=secret_access_key,
             region_name=region_name,
@@ -93,26 +98,19 @@ class EmailBackend(BaseEmailBackend):
         if not email_message.recipients():
             return False
 
-        from_email = sanitize_address(email_message.from_email,
-                                      email_message.encoding)
-        recipients = [sanitize_address(addr, email_message.encoding)
-                      for addr in email_message.recipients()]
-        message = email_message.message().as_bytes(linesep='\r\n')
+        from_email = sanitize_address(email_message.from_email, email_message.encoding)
+        recipients = [
+            sanitize_address(addr, email_message.encoding)
+            for addr in email_message.recipients()
+        ]
+        message = email_message.message().as_bytes(linesep="\r\n")
 
         try:
             result = self.conn.send_raw_email(
-                Source=from_email,
-                Destinations=recipients,
-                RawMessage={
-                    'Data': message
-                }
+                Source=from_email, Destinations=recipients, RawMessage={"Data": message}
             )
-            message_id = result['MessageId']
-            post_send.send(
-                self.__class__,
-                message=email_message,
-                message_id=message_id
-            )
+            message_id = result["MessageId"]
+            post_send.send(self.__class__, message=email_message, message_id=message_id)
         except (ClientError, BotoCoreError):
             if not self.fail_silently:
                 raise
