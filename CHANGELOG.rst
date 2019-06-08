@@ -1,6 +1,8 @@
 UNRELEASED
 ==========
 
+- Add ``BotoCoreError`` to set of exceptions for ``fail_silently``.
+
 2.1.0 - 2019-04-03
 ==================
 
