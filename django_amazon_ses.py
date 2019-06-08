@@ -1,7 +1,7 @@
 """Boto3 email backend class for Amazon SES."""
 import boto3
 
-from botocore.exceptions import ClientError
+from botocore.exceptions import BotoCoreError, ClientError
 
 from django.conf import settings
 from django.core.mail.backends.base import BaseEmailBackend
@@ -113,7 +113,7 @@ class EmailBackend(BaseEmailBackend):
                 message=email_message,
                 message_id=message_id
             )
-        except ClientError:
+        except (ClientError, BotoCoreError):
             if not self.fail_silently:
                 raise
             return False

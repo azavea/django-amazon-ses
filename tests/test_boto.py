@@ -1,4 +1,5 @@
 import boto3
+from botocore.exceptions import NoCredentialsError
 
 from moto import mock_ses_deprecated
 try:
@@ -105,3 +106,22 @@ class MailTests(SimpleTestCase):
         )
         conn.send_messages([email])
         self.assertEqual(conn.send_messages([email]), 0)
+
+    @mock.patch("botocore.client.BaseClient._make_api_call")
+    def test_suppress_botocore_error(self, mock_make_api_call):
+        """Ensure that fail_silently works when botocore raises an error."""
+        mock_make_api_call.side_effect = NoCredentialsError
+
+        conn = mail.get_connection('django_amazon_ses.EmailBackend')
+        email = EmailMessage(
+            'Subject', 'Content', 'bounce@example.com', ['to@example.com'],
+            headers={'From': 'from@example.com'},
+        )
+
+        self.assertFalse(conn.fail_silently)
+        with self.assertRaises(NoCredentialsError):
+            conn.send_messages([email])
+
+        conn.fail_silently = True
+        message_sent = conn.send_messages([email])
+        self.assertFalse(message_sent)
