@@ -1,3 +1,9 @@
+2.1.1 - 2019-06-08
+==================
+
+- Add ``BotoCoreError`` to set of exceptions for ``fail_silently``.
+- Reformat source code with `black`.
+
 2.1.0 - 2019-04-03
 ==================
 
