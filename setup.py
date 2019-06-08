@@ -10,7 +10,7 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 
 setup(
     name="django-amazon-ses",
-    version="2.1.0",
+    version="2.1.1",
     description="A Django email backend that uses Boto3 to interact with"
     "Amazon Simple Email Service (SES).",
     long_description=long_description,
