@@ -1,10 +1,7 @@
-UNRELEASED - 2018-03-05
+UNRELEASED - 2019-08-08
 =======================
 
-- Add option to use a specific AWS configuration set
-
-UNRELEASED
-==========
+- Add ``AWS_SES_CONFIGURATION_SET_NAME`` option to use a specific SES configuration set
 
 2.1.1 - 2019-06-08
 ==================
