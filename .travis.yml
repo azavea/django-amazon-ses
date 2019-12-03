@@ -13,10 +13,7 @@ python:
   - "3.5"
   - "3.6"
   - "3.7"
-
-before_install:
-  # Workaround Travis environment.
-  - sudo rm /etc/boto.cfg
+  - "3.8"
 
 install: pip install tox-travis
 

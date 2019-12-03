@@ -35,9 +35,10 @@ setup(
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
     ],
     keywords="django amazon ses email",
     py_modules=["django_amazon_ses"],
-    install_requires=["boto3 >= 1.3.0", "Django >= 1.11"],
+    install_requires=["boto3>=1.3.0", "Django>=1.11,<3.1",],
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
 )
