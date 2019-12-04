@@ -1,6 +1,9 @@
 UNRELEASED
 ==========
 
+- Add support for Django 3.x and Python 3.8. No actual code changes were
+  required.
+
 2.1.1 - 2019-06-08
 ==================
 
