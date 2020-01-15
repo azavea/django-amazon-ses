@@ -1,6 +1,11 @@
 UNRELEASED - 2020-01-15
 =======================
 
+3.0.1 - 2020-01-05
+==================
+- Bump version in ``setup.py`` to match Git tags. No actual code changes
+  were made.
+
 3.0.0 - 2020-01-05
 ==================
 
