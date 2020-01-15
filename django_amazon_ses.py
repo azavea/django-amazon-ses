@@ -121,8 +121,6 @@ class EmailBackend(BaseEmailBackend):
             result = self.conn.send_raw_email(**kwargs)
             message_id = result["MessageId"]
             post_send.send(self.__class__, message=email_message, message_id=message_id)
-            message_id = result["MessageId"]
-            post_send.send(self.__class__, message=email_message, message_id=message_id)
         except (ClientError, BotoCoreError):
             if not self.fail_silently:
                 raise
