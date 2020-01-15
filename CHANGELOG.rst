@@ -1,3 +1,16 @@
+UNRELEASED - 2020-01-15
+=======================
+
+3.0.0 - 2020-01-05
+==================
+
+- Add support for Django 3.x and Python 3.8. No actual code changes were
+  required.
+- Add ``AWS_SES_CONFIGURATION_SET_NAME`` option to use a specific SES
+  configuration set.
+- Drop support for Python 2.7 and 3.4.
+- Fix double invocation of post message send signal.
+
 2.1.1 - 2019-06-08
 ==================
 

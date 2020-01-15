@@ -108,6 +108,13 @@ Alternatively, provide AWS credentials using the settings below. This is useful 
     AWS_SES_SECRET_ACCESS_KEY = 'my_secret...'
     AWS_SES_REGION = 'us-west-2'
 
+If you want to force the use of a SES configuration set you can set the option below.
+This is useful when you want to do more detailed tracking of your emails such as opens and clicks. You can see more details at: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets.html.
+
+.. code:: python
+
+    AWS_SES_CONFIGURATION_SET_NAME = 'my_configuration_set'
+
 Usage
 -----
 

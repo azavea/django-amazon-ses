@@ -74,7 +74,7 @@ class MailTests(SimpleTestCase):
         self.assertIn("message", called_kwargs)
         self.assertEqual(email, called_kwargs["message"])
         self.assertIn("message_id", called_kwargs)
-        self.assertRegexpMatches(
+        self.assertRegex(
             called_kwargs["message_id"],
             r"\w{16,16}-\w{8,8}-\w{4,4}-\w{4,4}-\w{4,4}-\w{12,12}-\w{6,6}",
         )

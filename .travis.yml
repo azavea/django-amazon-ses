@@ -8,15 +8,10 @@ env:
     - CC_TEST_REPORTER_ID=f803b9ba86041d642b4dbe476ac2faa72be48478b22b4264b8f4a8c0f920fda7
 
 python:
-  - "2.7"
-  - "3.4"
   - "3.5"
   - "3.6"
   - "3.7"
-
-before_install:
-  # Workaround Travis environment.
-  - sudo rm /etc/boto.cfg
+  - "3.8"
 
 install: pip install tox-travis
 
