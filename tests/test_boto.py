@@ -3,10 +3,7 @@ from botocore.exceptions import NoCredentialsError
 
 from moto import mock_ses_deprecated
 
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from unittest import mock
 
 from django.conf import settings
 from django.core import mail

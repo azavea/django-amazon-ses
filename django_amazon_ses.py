@@ -33,7 +33,7 @@ class EmailBackend(BaseEmailBackend):
                 client errors should throw an exception.
 
         """
-        super(EmailBackend, self).__init__(fail_silently=fail_silently)
+        super().__init__(fail_silently=fail_silently)
 
         # Get configuration from AWS prefixed settings in settings.py
         access_key_id = getattr(settings, "AWS_ACCESS_KEY_ID", None)
