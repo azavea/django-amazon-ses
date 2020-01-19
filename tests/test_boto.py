@@ -142,3 +142,8 @@ class MailTests(SimpleTestCase):
         conn.fail_silently = True
         message_sent = conn.send_messages([email])
         self.assertFalse(message_sent)
+
+    @mock_ses_deprecated
+    def test_send_messages_empty_list(self):
+        conn = mail.get_connection("django_amazon_ses.EmailBackend")
+        self.assertEqual(conn.send_messages([]), 0)
