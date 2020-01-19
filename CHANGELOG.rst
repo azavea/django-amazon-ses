@@ -1,8 +1,17 @@
-UNRELEASED - 2020-01-15
+UNRELEASED - 2020-01-19
 =======================
+
+3.0.2 - 2020-01-19
+==================
+
+- Make verious improvements to ``tox`` test suite configuration.
+- Fix ``send_messages`` so that it returns ``0`` when no messages are supplied.
+- Move all module configuration to ``setup.cfg`` from ``setup.py``.
+- Upgrade ``moto``; stop making use of ``mock_ses_deprecated``.
 
 3.0.1 - 2020-01-05
 ==================
+
 - Bump version in ``setup.py`` to match Git tags. No actual code changes
   were made.
 
