@@ -1,7 +1,7 @@
 import boto3
 from botocore.exceptions import NoCredentialsError
 
-from moto import mock_ses_deprecated
+from moto import mock_ses
 
 from unittest import mock
 
@@ -17,7 +17,7 @@ settings.configure()
 
 
 class MailTests(SimpleTestCase):
-    @mock_ses_deprecated
+    @mock_ses
     def test_custom_backend(self):
         """Test Amazon SES backend."""
         client = boto3.client("ses", region_name="us-east-1")
@@ -33,7 +33,7 @@ class MailTests(SimpleTestCase):
         )
         self.assertGreater(conn.send_messages([email]), 0)
 
-    @mock_ses_deprecated
+    @mock_ses
     @mock.patch("django_amazon_ses.pre_send.send")
     def test_signal_pre(self, mock_signal):
         client = boto3.client("ses", region_name="us-east-1")
@@ -52,7 +52,7 @@ class MailTests(SimpleTestCase):
         self.assertIn("message", called_kwargs)
         self.assertEqual(email, called_kwargs["message"])
 
-    @mock_ses_deprecated
+    @mock_ses
     @mock.patch("django_amazon_ses.post_send.send")
     def test_signal_post(self, mock_signal):
         client = boto3.client("ses", region_name="us-east-1")
@@ -76,7 +76,7 @@ class MailTests(SimpleTestCase):
             r"\w{16,16}-\w{8,8}-\w{4,4}-\w{4,4}-\w{4,4}-\w{12,12}-\w{6,6}",
         )
 
-    @mock_ses_deprecated
+    @mock_ses
     def test_pre_change_recipients(self):
         new_email_address = "changed@example.com"
 
@@ -100,7 +100,7 @@ class MailTests(SimpleTestCase):
         conn.send_messages([email])
         self.assertEqual(email.to, [new_email_address])
 
-    @mock_ses_deprecated
+    @mock_ses
     def test_pre_remove_recipients(self):
         def remove_recipients(sender, message=None, **kwargs):
             message.to = []
@@ -142,3 +142,8 @@ class MailTests(SimpleTestCase):
         conn.fail_silently = True
         message_sent = conn.send_messages([email])
         self.assertFalse(message_sent)
+
+    @mock_ses
+    def test_send_messages_empty_list(self):
+        conn = mail.get_connection("django_amazon_ses.EmailBackend")
+        self.assertEqual(conn.send_messages([]), 0)

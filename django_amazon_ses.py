@@ -76,7 +76,7 @@ class EmailBackend(BaseEmailBackend):
                 failed.
         """
         if not email_messages:
-            return
+            return 0
 
         sent_message_count = 0
 
