@@ -1,6 +1,11 @@
 UNRELEASED - 2020-01-19
 =======================
 
+UNRELEASED
+==========
+
+- Remove support for end-of-life Django 2.0 and 2.1.
+
 3.0.2 - 2020-01-19
 ==================
 
