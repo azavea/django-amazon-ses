@@ -17,6 +17,7 @@ settings.configure()
 
 ROLE_ARN = 'arn:aws:iam::210987654321:role/ses_role'
 
+
 @override_settings(AWS_SES_ROLE_ARN=ROLE_ARN)
 class AssumeRoleTests(SimpleTestCase):
     @mock_sts
@@ -41,7 +42,7 @@ class AssumeRoleTests(SimpleTestCase):
         """We raise an exception on failure to assume role."""
         with self.assertRaises(ParamValidationError) as e:
             with override_settings(AWS_SES_ROLE_ARN='bad'):
-                conn = mail.get_connection("django_amazon_ses.EmailBackend")
+                mail.get_connection("django_amazon_ses.EmailBackend")
         self.assertIn('Invalid length for parameter RoleArn', str(e.exception))
 
     @mock_sts
@@ -67,7 +68,7 @@ class AssumeRoleTests(SimpleTestCase):
         """We raise an exception on failure to assume role with external id."""
         with self.assertRaises(ParamValidationError) as e:
             with override_settings(AWS_SES_EXTERNAL_ID='0'):
-                conn = mail.get_connection("django_amazon_ses.EmailBackend")
+                mail.get_connection("django_amazon_ses.EmailBackend")
         self.assertIn('Invalid length for parameter ExternalId', str(e.exception))
 
 

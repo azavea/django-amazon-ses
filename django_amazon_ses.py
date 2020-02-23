@@ -25,7 +25,6 @@ class EmailBackend(BaseEmailBackend):
         fail_silently=False,
         aws_access_key_id=None,
         aws_secret_access_key=None,
-        aws_session_token=None,
         **kwargs
     ):
         """Creates a client for the Amazon SES API.
@@ -82,7 +81,7 @@ class EmailBackend(BaseEmailBackend):
         if aws_access_key_id is not None and aws_secret_access_key is not None:
             access_key_id = aws_access_key_id
             secret_access_key = aws_secret_access_key
-            session_token = aws_session_token
+            session_token = kwargs.get('aws_session_token', None)
 
         self.conn = boto3.client(
             "ses",
