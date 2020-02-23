@@ -1,5 +1,6 @@
 """Boto3 email backend class for Amazon SES."""
 import boto3
+import time
 
 from botocore.exceptions import BotoCoreError, ClientError
 
@@ -24,6 +25,7 @@ class EmailBackend(BaseEmailBackend):
         fail_silently=False,
         aws_access_key_id=None,
         aws_secret_access_key=None,
+        aws_session_token=None,
         **kwargs
     ):
         """Creates a client for the Amazon SES API.
@@ -39,6 +41,7 @@ class EmailBackend(BaseEmailBackend):
         access_key_id = getattr(settings, "AWS_ACCESS_KEY_ID", None)
         secret_access_key = getattr(settings, "AWS_SECRET_ACCESS_KEY", None)
         region_name = getattr(settings, "AWS_DEFAULT_REGION", "us-east-1")
+        session_token = None
 
         # Override AWS prefixed configuration with Amazon SES-specific settings
         access_key_id = getattr(settings, "AWS_SES_ACCESS_KEY_ID", access_key_id)
@@ -49,17 +52,43 @@ class EmailBackend(BaseEmailBackend):
         self.configuration_set_name = getattr(
             settings, "AWS_SES_CONFIGURATION_SET_NAME", None
         )
+        role_arn = getattr(settings, "AWS_SES_ROLE_ARN", None)
+        external_id = getattr(settings, "AWS_SES_EXTERNAL_ID", None)
+
+        # if a role ARN is defined, assume that role for
+        # access_key/secret_access_key
+        if role_arn is not None:
+            sts = boto3.client(
+                'sts',
+                aws_access_key_id=access_key_id,
+                aws_secret_access_key=secret_access_key,
+                region_name=region_name
+            )
+            session_name = 'django-amazon-ses-{}'.format(int(time. time()))
+            assume_role_kwargs = {
+                'RoleArn': role_arn,
+                'RoleSessionName': session_name,
+            }
+            if external_id:
+                assume_role_kwargs['ExternalId'] = external_id
+
+            role = sts.assume_role(**assume_role_kwargs)
+            access_key_id = role['Credentials']['AccessKeyId']
+            secret_access_key = role['Credentials']['SecretAccessKey']
+            session_token = role['Credentials']['SessionToken']
 
         # Override all previous configuration if settings provided
         # through the constructor
         if aws_access_key_id is not None and aws_secret_access_key is not None:
             access_key_id = aws_access_key_id
             secret_access_key = aws_secret_access_key
+            session_token = aws_session_token
 
         self.conn = boto3.client(
             "ses",
             aws_access_key_id=access_key_id,
             aws_secret_access_key=secret_access_key,
+            aws_session_token=session_token,
             region_name=region_name,
         )
 

@@ -1,7 +1,7 @@
 import boto3
-from botocore.exceptions import NoCredentialsError
+from botocore.exceptions import NoCredentialsError, ParamValidationError
 
-from moto import mock_ses
+from moto import mock_ses, mock_sts
 
 from unittest import mock
 
@@ -9,11 +9,66 @@ from django.conf import settings
 from django.core import mail
 from django.core.mail import EmailMessage
 
-from django.test import SimpleTestCase
+from django.test import SimpleTestCase, override_settings
 
 from django_amazon_ses import pre_send
 
 settings.configure()
+
+ROLE_ARN = 'arn:aws:iam::210987654321:role/ses_role'
+
+@override_settings(AWS_SES_ROLE_ARN=ROLE_ARN)
+class AssumeRoleTests(SimpleTestCase):
+    @mock_sts
+    @mock_ses
+    def test_role_arn(self):
+        """We can assume role."""
+        client = boto3.client("ses", region_name="us-east-1")
+        client.verify_email_identity(EmailAddress="bounce@example.com")
+
+        conn = mail.get_connection("django_amazon_ses.EmailBackend")
+        email = EmailMessage(
+            "Subject",
+            "Content",
+            "bounce@example.com",
+            ["to@example.com"],
+            headers={"From": "from@example.com"},
+        )
+        self.assertGreater(conn.send_messages([email]), 0)
+
+    @mock_sts
+    def test_bad_role_arn(self):
+        """We raise an exception on failure to assume role."""
+        with self.assertRaises(ParamValidationError) as e:
+            with override_settings(AWS_SES_ROLE_ARN='bad'):
+                conn = mail.get_connection("django_amazon_ses.EmailBackend")
+        self.assertIn('Invalid length for parameter RoleArn', str(e.exception))
+
+    @mock_sts
+    @mock_ses
+    def test_external_id(self):
+        """We can assume role with external id."""
+        client = boto3.client("ses", region_name="us-east-1")
+        client.verify_email_identity(EmailAddress="bounce@example.com")
+
+        with override_settings(AWS_SES_EXTERNAL_ID='1234'):
+            conn = mail.get_connection("django_amazon_ses.EmailBackend")
+        email = EmailMessage(
+            "Subject",
+            "Content",
+            "bounce@example.com",
+            ["to@example.com"],
+            headers={"From": "from@example.com"},
+        )
+        self.assertGreater(conn.send_messages([email]), 0)
+
+    @mock_sts
+    def test_bad_external_id(self):
+        """We raise an exception on failure to assume role with external id."""
+        with self.assertRaises(ParamValidationError) as e:
+            with override_settings(AWS_SES_EXTERNAL_ID='0'):
+                conn = mail.get_connection("django_amazon_ses.EmailBackend")
+        self.assertIn('Invalid length for parameter ExternalId', str(e.exception))
 
 
 class MailTests(SimpleTestCase):
