@@ -108,6 +108,15 @@ Alternatively, provide AWS credentials using the settings below. This is useful 
     AWS_SES_SECRET_ACCESS_KEY = 'my_secret...'
     AWS_SES_REGION = 'us-west-2'
 
+If you want SES to assume a specific role when sending email you can the configuration below.
+```AWS_SES_EXTERNAL_ID``` is optional depending on your role requirements.
+If you specify an AWS access key/secret key in your configuration, it will use those in the AssumeRole API call and the temporary credentials in the SES API call.
+
+.. code:: python
+
+    AWS_SES_ROLE_ARN = 'arn:aws:iam::210987654321:role/ses_role'
+    AWS_SES_EXTERNAL_ID = 'd87e5499-00ec-4b16-a821-b59ec6d2e097'
+
 If you want to force the use of a SES configuration set you can set the option below.
 This is useful when you want to do more detailed tracking of your emails such as opens and clicks. You can see more details at: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets.html.
 
