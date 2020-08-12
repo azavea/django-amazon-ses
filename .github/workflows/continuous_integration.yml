@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.6", "3.7", "3.8"]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ hashFiles('setup.cfg') }}-${{ hashFiles('tox.ini') }}
+          restore-keys: pip-
+
+      - name: Install Tox and any other packages
+        run: pip install tox-gh-actions
+
+      - name: Run Tox
+        run: tox
+        env:
+          PYTHONPATH: ./tests/
+          DJANGO_SETTINGS_MODULE: settings_test
