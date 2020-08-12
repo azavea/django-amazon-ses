@@ -6,6 +6,7 @@ UNRELEASED
 
 - Add support for Django 3.1.
 - Remove support for end-of-life Django 1.11, 2.0 and 2.1.
+- Migrate from Travis to GitHub Actions.
 
 3.0.2 - 2020-01-19
 ==================
