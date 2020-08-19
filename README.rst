@@ -1,8 +1,8 @@
 django-amazon-ses
 =================
 
-.. image:: https://travis-ci.org/azavea/django-amazon-ses.svg?branch=develop
-    :target: https://travis-ci.org/azavea/django-amazon-ses
+.. image:: https://github.com/azavea/django-amazon-ses/workflows/CI/badge.svg
+    :target: https://github.com/azavea/django-amazon-ses/actions?query=workflow%3ACI
 .. image:: https://api.codeclimate.com/v1/badges/b69dce91215b7003066b/maintainability
     :target: https://codeclimate.com/github/azavea/django-amazon-ses/maintainability
 .. image:: https://api.codeclimate.com/v1/badges/b69dce91215b7003066b/test_coverage
