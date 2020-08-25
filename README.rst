@@ -39,8 +39,6 @@ First, install the Django Amazon SES email backend:
 
 Next, ensure that your Amazon Web Services (AWS) API credentials are setup, or that you are running on an Amazon EC2 instance with an instance profile that has access to the Amazon SES service.
 
-**Note**: Versions 1.0.x of ``django-amazon-ses`` are the last versions compatible with Django versions earlier than 1.11. If you are using Django versions earlier than 1.11.x, please pin your ``django-amazon-ses`` version.
-
 AWS Credential Setup
 --------------------
 
