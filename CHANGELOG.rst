@@ -1,5 +1,11 @@
-UNRELEASED - 2020-01-19
-=======================
+4.0.0 - 2020-08-25
+==================
+
+- Add support for Django 3.1.
+- Add support for Black source code formatting
+- Remove support for end-of-life Django 1.11, 2.0 and 2.1.
+- Remove support for Python 3.5
+- Migrate from Travis to GitHub Actions.
 
 3.0.2 - 2020-01-19
 ==================

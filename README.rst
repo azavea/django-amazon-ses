@@ -1,8 +1,8 @@
 django-amazon-ses
 =================
 
-.. image:: https://travis-ci.org/azavea/django-amazon-ses.svg?branch=develop
-    :target: https://travis-ci.org/azavea/django-amazon-ses
+.. image:: https://github.com/azavea/django-amazon-ses/workflows/CI/badge.svg
+    :target: https://github.com/azavea/django-amazon-ses/actions?query=workflow%3ACI
 .. image:: https://api.codeclimate.com/v1/badges/b69dce91215b7003066b/maintainability
     :target: https://codeclimate.com/github/azavea/django-amazon-ses/maintainability
 .. image:: https://api.codeclimate.com/v1/badges/b69dce91215b7003066b/test_coverage
@@ -38,8 +38,6 @@ First, install the Django Amazon SES email backend:
    $ pip install django-amazon-ses
 
 Next, ensure that your Amazon Web Services (AWS) API credentials are setup, or that you are running on an Amazon EC2 instance with an instance profile that has access to the Amazon SES service.
-
-**Note**: Versions 1.0.x of ``django-amazon-ses`` are the last versions compatible with Django versions earlier than 1.11. If you are using Django versions earlier than 1.11.x, please pin your ``django-amazon-ses`` version.
 
 AWS Credential Setup
 --------------------
