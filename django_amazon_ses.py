@@ -8,8 +8,8 @@ from django.core.mail.backends.base import BaseEmailBackend
 from django.core.mail.message import sanitize_address
 from django.dispatch import Signal
 
-pre_send = Signal(providing_args=["message"])
-post_send = Signal(providing_args=["message", "message_id"])
+pre_send = Signal()
+post_send = Signal()
 
 
 class EmailBackend(BaseEmailBackend):
