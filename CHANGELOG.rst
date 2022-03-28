@@ -5,7 +5,7 @@ Unreleased
 - Add Python 3.9 and 3.10 to the test matrix.
 - Add Django 3.2 and 4.0 to the test matrix.
 - Remove support for end-of-life Django 3.0 and 3.1.
-
+- Add ability to tag emails
 
 4.0.0 - 2020-08-25
 ==================
