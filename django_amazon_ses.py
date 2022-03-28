@@ -49,6 +49,7 @@ class EmailBackend(BaseEmailBackend):
         self.configuration_set_name = getattr(
             settings, "AWS_SES_CONFIGURATION_SET_NAME", None
         )
+        self.tags = getattr(settings, "AWS_SES_TAGS", None)
 
         # Override all previous configuration if settings provided
         # through the constructor
@@ -117,6 +118,8 @@ class EmailBackend(BaseEmailBackend):
 
             if self.configuration_set_name is not None:
                 kwargs["ConfigurationSetName"] = self.configuration_set_name
+            if self.tags is not None:
+                kwargs["Tags"] = self.tags
 
             result = self.conn.send_raw_email(**kwargs)
             message_id = result["MessageId"]
