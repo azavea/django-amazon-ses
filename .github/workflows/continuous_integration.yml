@@ -35,6 +35,3 @@ jobs:
 
       - name: Run Tox
         run: tox
-        env:
-          PYTHONPATH: ./tests/
-          DJANGO_SETTINGS_MODULE: settings_test
