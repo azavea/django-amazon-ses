@@ -1,7 +1,9 @@
 Unreleased
 ==========
 
+- Drop support for end-of-life Python 3.6.
 - Add Python 3.9 and 3.10 to the test matrix.
+
 
 4.0.0 - 2020-08-25
 ==================
