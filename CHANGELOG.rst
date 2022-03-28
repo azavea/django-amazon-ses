@@ -1,6 +1,8 @@
 Unreleased
 ==========
 
+- Drop support for end-of-life Python 3.6.
+
 4.0.0 - 2020-08-25
 ==================
 
