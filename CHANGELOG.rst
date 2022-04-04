@@ -1,4 +1,4 @@
-Unreleased
+4.0.1 - 2022-04-04
 ==========
 
 - Drop support for end-of-life Python 3.6.
